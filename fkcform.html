@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+    <title> KFC Order Form</title>
+    <style>
+        .container-fluid {
+            margin: auto;
+            padding: 20px;
+            width: 1000px;
+            margin-top: 10px;
+            border: 2px solid maroon;
+            box-shadow: 0px 4px 4px maroon;
+        }
+        
+        .form-group {
+            margin: auto;
+            padding: 20px;
+            margin-bottom: 20px;
+            margin-top: 20px;
+            border: 2px solid maroon;
+            box-shadow: 0px 4px 4px maroon;
+        }
+        
+        #popup {
+            position: fixed;
+            margin: auto;
+            top: 100px;
+            padding: 10px;
+            left: 550px;
+        }
+        
+        #td {
+            background-color: lightgoldenrodyellow;
+        }
+    </style>
+
+    <script>
+        function orderClick() {
+            document.getElementById("popup").style.display = "block";
+
+            document.getElementById("lblName").innerHTML = document.getElementById("txtName").value;
+
+            document.getElementById("lblMobile").innerHTML = document.getElementById("txtMobile").value;
+
+            var mealName;
+            var mealCost;
+            var adonName = "";
+            var adonCost;
+            var total;
+
+            var burgerRadio = document.getElementById("optBurger");
+            var rollerRadio = document.getElementById("optRoller");
+
+            var wingCheckBox = document.getElementById("optWings");
+            var krusherCheckBox = document.getElementById("optKrusher");
+
+            if (burgerRadio.checked) {
+                mealName = burgerRadio.value;
+                mealCost = 150;
+
+            }
+
+            if (rollerRadio.checked) {
+                mealName = rollerRadio.value;
+                mealCost = 100;
+
+            }
+
+            if (wingCheckBox.checked) {
+                adonName += wingCheckBox.value + "<br>";
+                adonCost = 80;
+                mealCost = mealCost + adonCost;
+
+            }
+
+            if (krusherCheckBox.checked) {
+                adonName += krusherCheckBox.value + "<br>";
+                adonCost = 60;
+                mealCost = mealCost + adonCost;
+
+            }
+            total = mealCost;
+            document.getElementById("lblMeal").innerHTML = mealName;
+            document.getElementById("lblAdOn").innerHTML = adonName;
+            document.getElementById("lblAmount").innerHTML = "&#8377;" + total;
+
+        }
+
+        function closeClick() {
+            document.getElementById("popup").style.display = "none";
+        }
+    </script>
+
+
+
+
+</head>
+
+<body class="container-fluid">
+
+    <div class="form-group">
+        <img src="../Eshop/Images/kfctop.png" class="img-fluid">
+
+    </div>
+    <div class="form-group">
+        <div>
+            <div class="text-center text-white font-weight-bold bg-danger">CUSTOMER INFORMATION</div>
+            <div class="justify-content-between form-inline">
+                <label> Name : </label>
+                <div>
+                    <input type="text" class="form-control" id="txtName">
+                </div>
+                <label>Mobile : </label>
+
+                <div>
+                    <input type="text" class="form-control" id="txtMobile">
+                </div>
+            </div>
+        </div>
+    </div>
+    </div><br>
+    <div class="form-group">
+        <div>
+            <div class="text-center text-white font-weight-bold bg-danger "> Select Your Meal </div>
+            <div class="card-deck">
+                <div class="card">
+                    <div class="card-header text-center">
+                        <div> <img src="./Images/omg2.png"> </div>
+                        <div class="card-footer text-center">
+                            <input type="radio" value="OMG Burger" id="optBurger" name="choose"> OMG Burger &#8377; 150/-
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header text-center">
+                        <img src="./Images/krusher1.png"> </div>
+
+                    <div class="card-footer text-center">
+                        <input type="radio" value="OMG Roller" id="optRoller" name="choose"> Brownie Blast &#8377; 100/-
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+
+    <div class="form-group">
+        <div>
+            <div class="text-center text-white font-weight-bold bg-danger "> Select Add OnS </div>
+            <div class="card-deck">
+                <div class="card">
+                    <div class="card-header text-center">
+                        <img src="./images/wings.png"> </div>
+                    <div class="card-footer text-center">
+                        <input type="checkbox" id="optWings" value="Hot Wings"> Hot Chicken Wings &#8377; 80/-
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header text-center">
+                        <img src="./images/krusher.jpg"> </div>
+                    <div class="card-footer text-center">
+                        <input type="checkbox" id="optKrusher" value="Krusher Brownie"> KFC Krusher &#8377; 60/-
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="form-group text-center">
+        <button class="btn btn-danger" onclick="orderClick()"> Place Order </button>
+    </div>
+
+
+
+    <div>
+        <table class="table-bordered table table-hover" id="popup" style="width: 300px; height: 300px; border: none maroon; display: none;">
+            <thead>
+                <tr>
+                    <th class="text-center bg-danger text-white" colspan="2">Bill Summary</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr>
+                    <td id="td"> Customer Name : </td>
+                    <td id="lblName" style="background-color:lightcoral; color: white;"> </td>
+                </tr>
+                <tr>
+                    <td id="td"> Mobile Number : </td>
+                    <td id="lblMobile" style="background-color:lightcoral; color: white;"> </td>
+                </tr>
+                <tr>
+                    <td id="td"> Selected Meal : </td>
+                    <td id="lblMeal" style="background-color:lightcoral; color: white;"> </td>
+                </tr>
+                <tr>
+                    <td id="td"> Addon Meal : </td>
+                    <td id="lblAdOn" style="background-color:lightcoral; color: white;"> </td>
+                </tr>
+                <tr>
+
+                    <td id="td"> Amount : </td>
+                    <td id="lblAmount" style="background-color:lightcoral; color: white;"> </td>
+                </tr>
+
+            </tbody>
+            <tfoot>
+                <tr class="text-center">
+                    <td id="td" colspan="2"> <button class="btn btn-danger" onclick="closeClick()"> Close </button> </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+
+
+    </div>
+
+    </div>
+
+</body>
+
+</html>
